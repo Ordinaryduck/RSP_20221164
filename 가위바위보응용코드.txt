@@ -1,0 +1,134 @@
+import java.util.Scanner;
+
+public class Seh20221164_mid2 {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        final int ROCK = 1;
+        final int SCISSOR = 2;
+        final int PAPER = 3;
+
+        int userHp = 10;
+        int computerHp = 10;
+
+        
+        //시작//
+        while (true) {
+            System.out.println("\n[현재 체력] 당신: " + userHp + " | 컴퓨터: " + computerHp);
+            System.out.println("가위, 바위, 보 중에 하나를 입력하세요.");
+            String userchoice = sc.nextLine().trim();
+            System.out.println("당신의 선택: " + userchoice);
+
+            int usersel;
+            switch (userchoice.toLowerCase()) {
+                case "가위":
+                    usersel = SCISSOR;
+                    break;
+                case "바위":
+                    usersel = ROCK;
+                    break;
+                case "보":
+                    usersel = PAPER;
+                    break;
+                default:
+                    System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+                    continue;
+            }
+
+            int computersel = (int) (Math.random() * 3) + 1;
+            String computerchoice = "";
+            switch (computersel) {
+                case ROCK:
+                    computerchoice = "바위";
+                    break;
+                case SCISSOR:
+                    computerchoice = "가위";
+                    break;
+                case PAPER:
+                    computerchoice = "보";
+                    break;
+            }
+            System.out.println("컴퓨터의 선택: " + computerchoice);
+
+            
+            //결과//
+            if (usersel == computersel) {
+                System.out.println("비겼습니다!");
+                userHp -= 1;
+                computerHp -= 1;
+                System.out.println("비겨서 둘 다 체력이 1 감소했습니다.");
+            } else if ((usersel == ROCK && computersel == SCISSOR) ||
+                       (usersel == SCISSOR && computersel == PAPER) ||
+                       (usersel == PAPER && computersel == ROCK)) {
+                System.out.println("당신이 이겼습니다!");
+
+                
+                //승리//
+                switch (usersel) {
+                    case SCISSOR:
+                        computerHp -= 2;
+                        System.out.println("가위로 이겨서 컴퓨터의 체력이 2 감소했습니다.");
+                        break;
+                    case ROCK:
+                        computerHp -= 1;
+                        System.out.println("바위로 이겨서 컴퓨터의 체력이 1 감소했습니다.");
+                        break;
+                    case PAPER:
+                        userHp += 1;
+                        System.out.println("보로 이겨서 당신의 체력이 1 증가했습니다.");
+                        break;
+                }
+
+            } else {
+                System.out.println("컴퓨터가 이겼습니다!");
+
+                
+                //컴퓨터 승리//
+                switch (computersel) {
+                    case SCISSOR:
+                        userHp -= 2;
+                        System.out.println("컴퓨터가 가위로 이겨서 당신의 체력이 2 감소했습니다.");
+                        break;
+                    case ROCK:
+                        userHp -= 1;
+                        System.out.println("컴퓨터가 바위로 이겨서 당신의 체력이 1 감소했습니다.");
+                        break;
+                    case PAPER:
+                        computerHp += 1;
+                        System.out.println("컴퓨터가 보로 이겨서 체력이 1 증가했습니다.");
+                        break;
+                }
+            }
+
+            
+            //종료//
+            if (userHp <= 0 && computerHp <= 0) {
+                System.out.println("\n당신과 컴퓨터의 체력이 모두 0이 되어 게임이 종료됩니다.\n");
+                System.out.println("\n비겼습니다.\n");
+                break;
+            } else if (userHp <= 0) {
+                System.out.println("\n당신의 체력이 0이 되어 게임이 종료됩니다.\n");
+                System.out.println("\n졌습니다. ㅠㅠ\n");
+                break;
+            } else if (computerHp <= 0) {
+                System.out.println("\n컴퓨터의 체력이 0이 되어 게임이 종료됩니다.\n");
+                System.out.println("\n이겼습니다!\n");
+                break;
+                
+                
+                
+            }
+        }
+
+        sc.close();
+    }
+}
+
+
+
+
+
+
+
+
