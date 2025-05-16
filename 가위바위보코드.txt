@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+
+public class Seh20221164_mid1 {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        final int ROCK = 1;
+        final int SCISSOR = 2;
+        final int PAPER = 3;
+
+        while (true) {
+            System.out.println("게임을 시작했습니다.");
+            System.out.println("가위, 바위, 보 중에 하나를 입력하세요.");
+            String userchoice = sc.nextLine();
+            System.out.println("당신의 선택: " + userchoice);
+
+            int usersel;
+            switch (userchoice.toLowerCase()) {
+                case "가위":
+                    usersel = SCISSOR;
+                    break;
+                case "바위":
+                    usersel = ROCK;
+                    break;
+                case "보":
+                    usersel = PAPER;
+                    break;
+                default:
+                    System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+                    continue;
+            }
+
+            int computersel = (int) (Math.random() * 3) + 1;
+            String computerchoice = "";
+            switch (computersel) {
+                case ROCK:
+                    computerchoice = "바위";
+                    break;
+                case SCISSOR:
+                    computerchoice = "가위";
+                    break;
+                case PAPER:
+                    computerchoice = "보";
+                    break;
+            }
+            System.out.println("컴퓨터의 선택: " + computerchoice);
+
+
+            
+            if (usersel == computersel) {
+                System.out.println("비겼습니다!");
+            } else if ((usersel == ROCK && computersel == SCISSOR) ||
+                       (usersel == SCISSOR && computersel == PAPER) ||
+                       (usersel == PAPER && computersel == ROCK)) {
+                System.out.println("당신이 이겼습니다!");
+            } else {
+                System.out.println("컴퓨터가 이겼습니다!");
+            }
+
+
+            System.out.println("다시 게임을 하시겠습니까? (네/아니요)");
+            String playAgain = sc.nextLine();
+            if (!playAgain.equalsIgnoreCase("네")) {
+                System.out.println("게임을 종료합니다.");
+                break;
+            }
+        }
+
+        sc.close();
+    }
+}
